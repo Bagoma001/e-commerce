@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,500;0,600;0,700;1,400;1,600;1,700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: poppins;
+  overflow-x: hidden;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw, 6rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 2.5vw, 3.5rem);
+}
+
+h3 {
+  font-size: clamp(1.8rem, 1.5vw, 3rem);
+}
+
+p {
+  font-size: clamp(1.8rem, 1.5vw, 1.8rem);
+}
+
+.paragraph {
+  font-size: clamp(2rem, 1.8vw, 2.2rem);
+}
+
+.button {
+  outline: transparent;
+  border: transparent;
+  background-color: transparent;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.link {
+  text-decoration: none;
+  font-size: 2rem;
+  color: white;
+}
