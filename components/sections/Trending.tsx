@@ -1,11 +1,7 @@
 import TrendingProducts from "./TrendingProducts";
 
 function Trending() {
-  return (
-    <div>
-      <TrendingProducts />
-    </div>
-  );
+  return <TrendingProducts />;
 }
 
 export default Trending;

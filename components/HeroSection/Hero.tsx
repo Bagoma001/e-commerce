@@ -9,10 +9,12 @@ import livingRoom from "@/app/assets/img/living-room.jpg";
 
 function Hero() {
   return (
-    <section>
-      <div className="hero-flex">
+    <section className="container">
+      <div className="flex-evenly">
         <div className="hero-text">
-          <h1>Modern interior Studio Design</h1>
+          <h1 className="font-monserrat black margin-bottom">
+            Modern interior Studio Design
+          </h1>
 
           <p>
             Choosing the right furniture for your home will add elegance and
@@ -44,7 +46,7 @@ function Hero() {
         </div>
       </div>
 
-      <div className="button-flex">
+      <div className="icon-flex margin-top">
         <Buttons button="back-button">
           <HiOutlineArrowLongLeft className="btn" />
         </Buttons>

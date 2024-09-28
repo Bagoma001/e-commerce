@@ -12,26 +12,26 @@ import { FaRegUser } from "react-icons/fa";
 export default function Navigation() {
   return (
     <nav>
-      <div className="nav-starter-flex">
-        <div className="socials">
+      <div className="flex-around background-lightBlue padding-1">
+        <div className="flex-between">
           <p>Follow us</p>
           <FaInstagram className="icons" />
           <ImFacebook className="icons" />
           <FaXTwitter className="icons" />
         </div>
 
-        <div className="sign-up-discount">
+        <div>
           <p>Sign up and get 20% off for all collections</p>
         </div>
 
-        <div className="business-phone socials">
+        <div className="flex-between">
           <PiPhoneOutgoingThin className="phone-icon" />
 
           <p>1(100)954-2789</p>
         </div>
       </div>
 
-      <div className="navigation-flex-container">
+      <div className="flex-around padding-1">
         <div className="logo">
           <h2>Logo</h2>
         </div>

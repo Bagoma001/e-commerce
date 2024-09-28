@@ -13,8 +13,8 @@ import officeChair from "@/app/assets/img/office-chair.png";
 export default function SectionOne() {
   return (
     <>
-      <section className="section-container">
-        <div className="features-flex-container">
+      <section className="container">
+        <div className="flex-between padding-2">
           <div className="feature-flex">
             <CiDeliveryTruck className="feature-icon" />
             <h3>Fast and Free Shipping</h3>
@@ -38,7 +38,7 @@ export default function SectionOne() {
 
         {/* NEW COLLECTIONS */}
         <div className="collection-grid-container">
-          <div className="collection-one collection-flex ">
+          <div className="collection-one flex-evenly">
             <div className="text">
               <p className="paragraph collection-heading ">New Collection</p>
 
@@ -60,7 +60,7 @@ export default function SectionOne() {
           </div>
 
           {/* SECOND GRID COLLECTION */}
-          <div>
+          <div className="second-collection">
             <p className="paragraph collection-heading">New Collection</p>
             <h3>Authentic Sofa</h3>
             <div className="collection-two collection-two-flex text">
@@ -86,7 +86,7 @@ export default function SectionOne() {
           </div>
 
           {/* THIRD GRID COLLECTION */}
-          <div className="collection-three background-second-collection">
+          <div className="collection-three background-alice padding-2">
             <div>
               <p className="paragraph paragraph-heading">New Collection</p>
               <h3>Lighting Lamp</h3>

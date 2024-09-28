@@ -1,48 +1,45 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { FaShoppingCart } from "react-icons/fa";
-import { GrFavorite } from "react-icons/gr";
 
 import axios from "axios";
 import Link from "next/link";
-import Image from "next/image";
-import Buttons from "../utils/Buttons";
 
-interface DataType {
-  _id: string;
-  category: string;
-  imageCover: string;
-  name: string;
-  discountPrice: number;
-  discount: number;
-}
+import Buttons from "../utils/Buttons";
+import Slideshow from "../utils/Slideshow";
+import ErrorPage from "../utils/ErrorPage";
+import { Product } from "../utils/Slideshow";
 
 const TrendingProducts = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const [product, setProduct] = useState<DataType[]>([]);
+  const [product, setProduct] = useState<Product | []>([]);
   const [productCategory, setProductCategory] = useState("bedroom");
   const [isSelected, setIsSelected] = useState("bedroom");
+  const [error, setError] = useState(false);
+  const [loadingState, setLoadingState] = useState(true);
 
   useEffect(() => {
     async function loadData() {
+      // setLoadingState(true);
       let url = `http://127.0.0.1:3000/api/v1/products?category=${productCategory}`;
 
       try {
         const response = await axios(url);
-
-        if (!response.status) {
-          throw new Error("Something went wrong");
+        if (response.data.status !== "success") {
+          console.log("something went wrong");
+          throw new Error("Something went wrong, please check back");
         }
         const data = response.data.data.products;
         setProduct(data);
+        setLoadingState(false);
       } catch (err) {
         console.log(err);
+        setError(true);
       }
     }
 
     loadData();
-  }, [setProduct, productCategory]);
+  }, [setProduct, productCategory, setError]);
 
   function chooseCategory(category: string) {
     setProductCategory(category);
@@ -51,10 +48,10 @@ const TrendingProducts = () => {
 
   return (
     <>
-      <section className="trending-space">
-        <div className="trending-flex">
+      <section className="container">
+        <div className="flex-between">
           <div>
-            <h2> Trending products for you</h2>
+            <h3> Trending products for you</h3>
           </div>
 
           <div className="trending-link">
@@ -66,7 +63,7 @@ const TrendingProducts = () => {
           </div>
         </div>
 
-        <div className="dining-flex">
+        <div className="flex-start flex">
           <Buttons
             ref={buttonRef}
             onClick={() => chooseCategory("bedroom")}
@@ -108,48 +105,11 @@ const TrendingProducts = () => {
             Office Chairs
           </Buttons>
         </div>
-
-        <div>
-          <ul className="trending-products">
-            {product.map((el) => (
-              <li key={el._id} className="trending_products-feature">
-                <div className="position">
-                  <div className="discount-wishlist">
-                    <div className="discount">
-                      <p>{`-${el.discount}%`} </p>
-                    </div>
-
-                    <div className="wishlist">
-                      <Buttons>
-                        <GrFavorite />
-                      </Buttons>
-                    </div>
-                  </div>
-                </div>
-                <Image
-                  src={`http://127.0.0.1:3000/${el.imageCover}`}
-                  alt={el.category}
-                  width="450"
-                  height="200"
-                  className="img-product"
-                />
-                <div className="trending-details">
-                  <div>
-                    <p className="trending-name">{el.name}</p>
-                    <p className="trend-price">
-                      {" "}
-                      {`$${el.discountPrice.toFixed(2)}`}
-                    </p>
-                  </div>
-
-                  <Buttons>
-                    <FaShoppingCart className="trend-cart" />
-                  </Buttons>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {loadingState ? (
+          <h1> Loading requested data </h1>
+        ) : (
+          <div>{error ? <ErrorPage /> : <Slideshow products={product} />}</div>
+        )}
       </section>
     </>
   );

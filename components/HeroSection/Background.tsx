@@ -5,8 +5,8 @@ interface propType {
   children: ReactNode;
 }
 
-const Background: React.FC<propType> = ({ children }) => {
-  return <div className="background">{children}</div>;
+const Background = ({ children }: propType) => {
+  return <div className="background-alice">{children}</div>;
 };
 
 export default Background;

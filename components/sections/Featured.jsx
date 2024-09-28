@@ -6,13 +6,15 @@ import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { HiOutlineArrowLongLeft } from "react-icons/hi2";
-import Buttons from "../utils/Buttons";
 import Image from "next/image";
 import Link from "next/link";
+import Buttons from "../utils/Buttons";
+import ErrorPage from "../utils/ErrorPage";
 
 function Featured() {
   const [products, setProducts] = useState([]);
   const swiperRef = useRef(null);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     async function getFeaturedProducts() {
@@ -21,15 +23,20 @@ function Featured() {
           "http://127.0.0.1:3000/api/v1/products/featured-categories"
         );
 
+        if (data.status !== "success") {
+          console.log("somwthing went wrong");
+          throw new Error("Something Went wrong, Please try again");
+        }
         const { products } = data.data;
         setProducts(products);
       } catch (err) {
         console.log(err);
+        setError(true);
       }
     }
 
     getFeaturedProducts();
-  }, [setProducts]);
+  }, [setProducts, setError]);
 
   function goPrev() {
     if (swiperRef.current) {
@@ -43,18 +50,14 @@ function Featured() {
     }
   }
 
-  function checkRef() {
-    console.log("check for ref");
-  }
-
   return (
-    <section className="feature-size">
-      <div className="featured">
+    <section className="container">
+      <div className="flex-between">
         <div>
           <h2>Featured Categories</h2>
         </div>
 
-        <div className="button-flex">
+        <div className="flex-evenly">
           <Buttons button="featured-btn" ref={swiperRef} onClick={goPrev}>
             <HiOutlineArrowLongLeft className="btn" />
           </Buttons>
@@ -66,31 +69,35 @@ function Featured() {
       </div>
 
       <div className="">
-        <ul className="slideshow-container">
-          <Swiper
-            spaceBetween={10}
-            slidesPerView={4}
-            onSwiper={(swiper) => (swiperRef.current = swiper)} // Get the Swiper instance
-          >
-            {products.map((el) => (
-              <SwiperSlide key={el._id}>
-                <div className="slide-content">
-                  <Image
-                    src={`http://127.0.0.1:3000/${el.imageCover}`}
-                    alt={el.category}
-                    className="quarter-image"
-                    // fill
-                    width="500"
-                    height="200"
-                  />
-                  <Link href={"/products"} className="featured-link">
-                    {el.category}
-                  </Link>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </ul>
+        {error ? (
+          <ErrorPage />
+        ) : (
+          <ul className="slideshow-container list-type">
+            <Swiper
+              spaceBetween={10}
+              slidesPerView={4}
+              onSwiper={(swiper) => (swiperRef.current = swiper)} // Get the Swiper instance
+            >
+              {products.map((el) => (
+                <SwiperSlide key={el._id}>
+                  <div className="slide-content">
+                    <Image
+                      src={`http://127.0.0.1:3000/${el.imageCover}`}
+                      alt={el.category}
+                      className="quarter-image"
+                      // fill
+                      width="500"
+                      height="200"
+                    />
+                    <Link href={"/products"} className="featured-link">
+                      {el.category}
+                    </Link>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </ul>
+        )}
       </div>
     </section>
   );

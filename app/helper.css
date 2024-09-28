@@ -2,6 +2,17 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,400;0,700;1,400;1,700&display=swap");
+
+:root {
+  --color-yellow: #f08c00;
+  --color-blue: #405d72;
+  --color-lightblue: #3a6d8c;
+  --color-aliceblue: #f0f8ff;
+  --color-lightgrey: #f1f3f5;
+  --color-lessgrey: #ced4da;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -16,20 +27,26 @@ body {
   overflow-x: hidden;
 }
 
+.container {
+  max-width: clamp(100%, 90vw, 100%);
+  margin: 0 auto;
+  padding: clamp(1rem, 3vw, 5rem);
+}
+
 h1 {
-  font-size: clamp(2rem, 4vw, 6rem);
+  font-size: clamp(2.5rem, 4.5vw, 6rem);
 }
 
 h2 {
-  font-size: clamp(2rem, 2.5vw, 3.5rem);
+  font-size: clamp(2rem, 3vw, 3.5rem);
 }
 
 h3 {
-  font-size: clamp(1.8rem, 1.5vw, 3rem);
+  font-size: clamp(2rem, 2.5vw, 3rem);
 }
 
 p {
-  font-size: clamp(1.8rem, 1.5vw, 1.8rem);
+  font-size: clamp(2rem, 1.3vw, 2rem);
 }
 
 .paragraph {
@@ -46,6 +63,105 @@ p {
 
 .link {
   text-decoration: none;
-  font-size: 2rem;
+  font-size: clamp(1.8rem, 1.2vw, 2.5rem);
   color: white;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 1.5vw, 2rem);
+}
+
+.flex-around {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: clamp(1rem, 1.5vw, 2rem);
+  flex-wrap: wrap;
+}
+
+.flex-evenly {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: clamp(1rem, 1.5vw, 2rem);
+  flex-wrap: wrap;
+}
+
+.flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: clamp(1rem, 1.5vw, 2rem);
+  flex-wrap: wrap;
+}
+
+.background-blue {
+  background-color: var(--color-blue);
+}
+
+.background-alice {
+  background-color: var(--color-aliceblue);
+}
+
+.background-yellow {
+  background-color: var(--color-yellow);
+}
+
+.background-lightBlue {
+  background-color: var(--color-lightblue);
+}
+
+.background-lightgrey {
+  background-color: var(--color-lessgrey);
+}
+
+.white {
+  color: white;
+}
+
+.black {
+  color: black;
+}
+
+.padding-1 {
+  padding: clamp(1rem, 1vw, 2rem);
+}
+
+.padding-2 {
+  padding: clamp(1rem, 2vw, 3rem);
+}
+
+.margin-top {
+  margin-top: clamp(1rem, 2vw, 3rem);
+}
+
+.margin-bottom {
+  margin-bottom: clamp(1rem, 2vw, 3rem);
+}
+
+.icons-size {
+  font-size: clamp(2.5rem, 3vw, 4rem);
+  color: white;
+}
+
+.list-type {
+  list-style-type: none;
+  display: inline-block;
+}
+
+.img {
+  max-width: 100%;
+  height: auto;
+}
+
+.font-montserrat {
+  font-family: Montserrat;
+}
+
+.border-50 {
+  border-radius: 50%;
 }

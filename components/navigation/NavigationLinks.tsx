@@ -9,11 +9,11 @@ interface navigationProp {
   children: ReactNode;
 }
 
-const NavigationLinks: React.FC<navigationProp> = ({ href, children }) => {
+const NavigationLinks = ({ href, children }: navigationProp) => {
   const path = usePathname();
 
   return (
-    <ul className="nav-list-container">
+    <ul className="list list-type">
       <li className="nav-list">
         <Link href={href} className={path.endsWith(href) ? "active" : ""}>
           {children}
